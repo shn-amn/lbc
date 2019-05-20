@@ -27,4 +27,3 @@ func MostPopular() HitStats {
 	defer mux.Unlock()
 	return mostPopular
 }
-

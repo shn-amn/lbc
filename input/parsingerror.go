@@ -13,4 +13,3 @@ func (pe ParsingError) Error() string {
 func AggErrors(pe ParsingError, s string) ParsingError {
 	return ParsingError(append([]string(pe), s))
 }
-
