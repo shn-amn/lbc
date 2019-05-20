@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-	"strings"
 )
 
 type Parameters struct {
@@ -13,16 +12,6 @@ type Parameters struct {
 	Limit int    `json:"limit"`
 	Str1  string `json:"str1"`
 	Str2  string `json:"str2"`
-}
-
-type ParsingError []string
-
-func (pe ParsingError) Error() string {
-	return strings.Join([]string(pe), " ")
-}
-
-func AggErrors(pe ParsingError, s string) ParsingError {
-	return ParsingError(append([]string(pe), s))
 }
 
 func ParseParams(queries map[string][]string) (params Parameters, pe ParsingError) {
