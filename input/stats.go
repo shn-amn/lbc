@@ -1,5 +1,7 @@
 package input
 
+import "sync"
+
 type HitStats struct {
 	Parameters
 	Hits int `json:"hits"`
@@ -7,8 +9,11 @@ type HitStats struct {
 
 var stats = make(map[Parameters]int)
 var mostPopular HitStats
+var mux sync.Mutex
 
-func RegisterStats(params Parameters) int {
+func RegisterHit(params Parameters) int {
+	mux.Lock()
+	defer mux.Unlock()
 	hits := stats[params] + 1
 	stats[params] = hits
 	if hits > mostPopular.Hits {
@@ -18,5 +23,8 @@ func RegisterStats(params Parameters) int {
 }
 
 func MostPopular() HitStats {
+	mux.Lock()
+	defer mux.Unlock()
 	return mostPopular
 }
+

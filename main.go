@@ -12,6 +12,7 @@ import (
 func fizzbuzzList(r *http.Request) (int, interface {}) {
 	params, err := input.ParseParams(r.URL.Query())
 	if err == nil {
+		input.RegisterHit(params)
 		f := fizzbuzz.New(params.Int1, params.Int2, params.Str1, params.Str2)
 		res := make([]string, params.Limit)
 		for i := range res {
