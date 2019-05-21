@@ -1,5 +1,5 @@
 # lbc
-## A tiny fizz-buzz server in Go
+### A tiny fizz-buzz server in Go
 
 This service exposes two endpoint, `/fizzbuzz` and `/statistics`.
 The first endpoint plays a little fizz-buzz game with you,
@@ -56,3 +56,35 @@ $ curl "localhost:8080/fizzbuzz?int1=0&int2=abc&str1=hello"
 
 To every HTTP method other than get, the response is the typical `404 page not found`
 (without the JSON content type header).
+
+## Statistics
+The service keeps statistics of every successful call it receives.
+The statistics consist in the number of calls received by the server
+for every set of input parameters since the server is up.
+No statistics are kept on input errors.
+
+> Statistics are not persisted.
+  so if the server is down, previous statistics are lost and reset to zero.
+
+### The route `/statistics`
+This route takes no parameters.
+It exposes the parameters with which the `/fizzbuzz` route is most often called,
+and the number of calls with this parameters in the form of a JSON object.
+
+```bash
+shn@34:~$ curl localhost:8080/statistics
+
+{"int1":3,"int2":5,"limit":20,"str1":"fizz","str2":"buzz","hits":3}
+```
+
+### Race conditions
+Registration of these statistics can be prone to **race conditions**.
+To avoid this problem,
+if I were using a language with actor-based concurrency,
+such as Erlang, Elixir or even Scala,
+I would have used a state actor to keep statistics.
+
+Actors can be simulated by single-channel goroutines in Go.
+However in the context of the exercise,
+this solution seemed a bit of an overkill to me.
+So I just went with mutual exclusion (mutex) locks.
