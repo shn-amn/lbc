@@ -20,6 +20,7 @@ The generalised version exposed by this service takes five parameters:
 - a string `str2` that replaces "buzz",
 - and a positive integer `limit`.
 It then plays the game for you from 1 up to (and including) `limit`.
+It also spells out every number in written English.
 
 ### The route `/fizzbuzz`
 To an `GET` request with the five query parameters listed above,
@@ -27,14 +28,14 @@ the service responds with a JSON array containing
 `"<str1>"` for every multiple of `int1`,
 `"<str2>"` for every multiple of `int2`,
 `"<str1><str2>"` for every multiple of both,
-and `"<n>"` for every other integer `<n>`,
+and `"<n spelled out in English>"` for every other integer `<n>`,
 going from 1 to `<limit>` including both ends.
 As in this example:
 
 ```bash
 $ curl "localhost:8080/fizzbuzz?int1=5&int2=7&str1=hello&str2=world&limit=50"
 
-["1","2","3","4","hello","6","world","8","9","hello","11","12","13","world","hello","16","17","18","19","hello","world","22","23","24","hello","26","27","world","29","hello","31","32","33","34","helloworld","36","37","38","39","hello","41","world","43","44","hello","46","47","48","world","hello"]
+["one","two","three","four","hello","six","world","eight","nine","hello","eleven","twelve","thirteen","world","hello","sixteen","seventeen","eighteen","nineteen","hello","world","twenty-two","twenty-three","twenty-four","hello","twenty-six","twenty-seven","world","twenty-nine","hello","thirty-one","thirty-two","thirty-three","thirty-four","helloworld","thirty-six","thirty-seven","thirty-eight","thirty-nine","hello","fourty-one","world","fourty-three","fourty-four","hello","fourty-six","fourty-seven","fourty-eight","world","hello"]
 ```
 
 ### Errors
