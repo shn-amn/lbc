@@ -1,4 +1,4 @@
-package nums
+package spell
 
 import (
 	"strings"
@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-func InLetters(n int) string {
+func NumberInLetters(n int) string {
 	if n == 0 {
 		return zero
 	}

@@ -1,4 +1,4 @@
-package nums
+package spell
 
 const zero = "zero"
 

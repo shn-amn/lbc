@@ -1,6 +1,6 @@
 package fizzbuzz
 
-import "../nums"
+import "../spell"
 
 func New(n, m int, fizz, buzz string) func(int) string {
 	f := func(i int) string {
@@ -12,7 +12,7 @@ func New(n, m int, fizz, buzz string) func(int) string {
 		case rm == 0:
 			return buzz
 		default:
-			return nums.InLetters(i)
+			return spell.NumberInLetters(i)
 		}
 	}
 	return f
