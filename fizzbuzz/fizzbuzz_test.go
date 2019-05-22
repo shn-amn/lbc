@@ -1,8 +1,9 @@
 package fizzbuzz
 
 import (
+	"../spell"
+
 	"fmt"
-	"strconv"
 	"testing"
 )
 
@@ -26,8 +27,8 @@ func TestConvertor(t *testing.T) {
 	if f(4*n*m) != fizz+buzz {
 		t.Error(e(4*n*m, fizz+buzz))
 	}
-	if n != 1 && m != 1 && f(n*m+1) != strconv.Itoa(n*m+1) {
-		t.Error(e(n*m+1, strconv.Itoa(n*m+1)))
+	if n != 1 && m != 1 && f(n*m+1) != spell.NumberInLetters(n*m+1) {
+		t.Error(e(n*m+1, spell.NumberInLetters(n*m+1)))
 	}
 }
 
