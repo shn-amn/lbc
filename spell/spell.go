@@ -10,7 +10,7 @@ func NumberInLetters(n int) string {
 	if n == 0 {
 		return zero
 	}
-	var parts = []string{subthousandInLetters(n % 1000)}
+	var parts = []string{subthousandInLetters(n % 1000, n > 1000)}
 	biggie := 1000
 	for n /= 1000; n > 0; n /= 1000 {
 		r := n % 1000
@@ -19,14 +19,14 @@ func NumberInLetters(n int) string {
 			panic(errors.New("I can't yet count this hight!"))
 		case r == 0:
 		default:
-			parts = append(parts, fmt.Sprintf("%s %s", subthousandInLetters(r), name))
+			parts = append(parts, fmt.Sprintf("%s %s", subthousandInLetters(r, false), name))
 		}
 		biggie *= 1000
 	}
 	return strings.Join(reverse(parts), " ")
 }
 
-func subthousandInLetters(n int) string{
+func subthousandInLetters(n int, keepAnd bool) string{
 	switch {
 	case n == 0:
 		panic(errors.New("0 should be treated separately."))
@@ -34,6 +34,8 @@ func subthousandInLetters(n int) string{
 		panic(errors.New(fmt.Sprintf("%d is a negative number.", n)))
 	case n > 999:
 		panic(errors.New(fmt.Sprintf("%d is greater than a thousand.", n)))
+	case n < 100 && keepAnd:
+		return fmt.Sprintf("and %s", subhundredInLetters(n))
 	case n < 100:
 		return subhundredInLetters(n)
 	case n % 100 == 0:
@@ -50,7 +52,7 @@ func subhundredInLetters(n int) string {
 	case n < 0:
 		panic(errors.New(fmt.Sprintf("%d is a negative number.", n)))
 	case n > 99:
-		panic(errors.New(fmt.Sprintf("%d is greater than a hundred.")))
+		panic(errors.New(fmt.Sprintf("%d is greater than a hundred.", n)))
 	case n % 10 == 0:
 		return tens[n / 10]
 	case n < 10:
