@@ -2,7 +2,7 @@ package fizzbuzz
 
 import "strconv"
 
-func New(n, m int, fizz, buzz string) func(int) string {
+func Convertor(n, m int, fizz, buzz string) func(int) string {
 	f := func(i int) string {
 		switch rn, rm := i%n, i%m; {
 		case rn == 0 && rm == 0:
@@ -16,4 +16,13 @@ func New(n, m int, fizz, buzz string) func(int) string {
 		}
 	}
 	return f
+}
+
+func List(limit, n, m int, fizz, buzz string) []string {
+	f := Convertor(n, m, fizz, buzz)
+	list := make([]string, limit)
+	for i := range list {
+		list[i] = f(i + 1)
+	}
+	return list
 }
