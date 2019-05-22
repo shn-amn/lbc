@@ -14,7 +14,7 @@ var fingers = map[int]string{
 	9: "nine",
 }
 
-var toes = map[int]string {
+var toes = map[int]string{
 	11: "eleven",
 	12: "twelve",
 	13: "thirteen",
@@ -26,7 +26,7 @@ var toes = map[int]string {
 	19: "nineteen",
 }
 
-var tens = map[int]string {
+var tens = map[int]string{
 	1: "ten",
 	2: "twenty",
 	3: "thirty",
@@ -38,8 +38,8 @@ var tens = map[int]string {
 	9: "ninety",
 }
 
-var biggies = map[int]string {
-	1000: "thousand",
-	1000000: "million",
+var biggies = map[int]string{
+	1000:       "thousand",
+	1000000:    "million",
 	1000000000: "billion",
 }
